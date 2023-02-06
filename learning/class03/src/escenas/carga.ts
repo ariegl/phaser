@@ -41,7 +41,7 @@ export default class Carga extends Phaser.Scene
 
         //Carga los assets del juego
         //Para pruebas cargar 1000 veces la misma imagen con diferentes keys
-        for (let i=1;i<=400;i++) this.load.image('logo' + i, 'assets/phaser3-logo.png');        
+        for (let i=1;i<=50;i++) this.load.image('logo' + i, 'assets/phaser3-logo.png');        
     }
 
     /**

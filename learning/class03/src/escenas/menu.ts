@@ -22,6 +22,8 @@ export default class Menu extends Phaser.Scene {
     cambiarEscena(jugarTxt: Phaser.GameObjects.Text, escena: string) {
         jugarTxt.on('pointerdown', () => {
             this.scene.start(escena);
+            this.scene.start('HUD');
+            this.scene.bringToTop('HUD');
         });
     }
 }
