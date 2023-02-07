@@ -1,22 +1,41 @@
-import { GameObjects } from "phaser";
-
 export default class HUD extends Phaser.Scene {
     private vidasTxt : Phaser.GameObjects.Text;
+    private puntuacionTxt : Phaser.GameObjects.Text;
 
-    constructor() {
+    private width: number;
+    private height: number;
+
+    constructor(){
         super('HUD');
     }
 
-    create() : void {
+    init(){
+        this.width = this.cameras.main.width;
+        this.height = this.cameras.main.height;
+    }
+
+    create(): void{
         const nivel1: Phaser.Scene = this.scene.get('Nivel1');
-        nivel1.events.on('cambiarvidas',this.actualizaVidas, this);
+        nivel1.events.on('cambiarvidas', this.actualizaVidas, this);
+        nivel1.events.on('cambiaPuntuacion', this.actualizaPuntuacion, this);
 
-        this.vidasTxt = this.add.text(20,20,"Vidas: 3", {fontSize: '32px',color: '#FFFFFF'});
+
+
+        this.vidasTxt = this.add.text(20,20, 'Vidas:3', {fontSize:'32px', color:'#FFFFFF'});
         
+        this.puntuacionTxt = this.add.text(this.width - 50 ,20, '000', { fontSize: '20px', color: '#FFFFFF' })
+
+
     }
 
-    private actualizaVidas() : void {
-        this.vidasTxt.text = "Vidas: " + this.registry.get('vidas');
+    private actualizaVidas(): void{
+        this.vidasTxt.text = "Vidas:" + this.registry.get('vidas');
     }
+
+    private actualizaPuntuacion(): void {
+        this.puntuacionTxt.text = Phaser.Utils.String.Pad(this.registry.get("puntuacion"), 3, '0', 1);
+    }
+
+
 
 }
